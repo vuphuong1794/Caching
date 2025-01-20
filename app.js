@@ -40,6 +40,17 @@ app.get("/products", async (req, res) => {
     return res.json(products);
 });
 
+app.put("/update", async (req, res) => {
+    const product = await Product.findById(req.query.id);
+    product.name = req.body.name;
+
+    await product.save();
+
+    nodeCache.del("products");
+
+    return res.json(product);
+})
+
 //create dummy data
 // async function createProduct(count=10) {
 //     const products =[];
