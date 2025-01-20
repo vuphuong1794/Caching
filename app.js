@@ -8,7 +8,10 @@ import NodeCache from "node-cache";
 
 const app = express();
 const port = 3000;
-const nodeCache = new NodeCache();
+const nodeCache = new NodeCache({
+    stdTTl: 60,
+}
+);
 
 app.use(express.json());
 app.use(morgan("dev"));
